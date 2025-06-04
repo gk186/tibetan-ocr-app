@@ -44,6 +44,24 @@ This app does not have a package for MacOS on Intel processors at the moment (co
 6. Run `pyside6-rcc resources.qrc -o resources.py`
 7. Run `python main.py`
 
+### Using the OCR engine from Python
+
+You can call the OCR pipeline without launching the GUI by using the
+`OCRPipeline` class. First load the OCR and line detection models and then run
+`pipeline.run_ocr` on an image:
+
+```python
+from ocr_api import load_pipeline, ocr_image
+
+pipeline = load_pipeline("/path/to/OCRModel")
+lines = ocr_image("page.jpg", pipeline)
+print("\n".join(lines))
+```
+
+The model directory passed to `load_pipeline` must contain a
+`model_config.json` file describing the ONNX model. Example models can be
+downloaded from the project's release page.
+
 ### OCR Models
 
 The application comes with pre-installed OCR models that are ready to use. These models are automatically loaded when you start the application.
